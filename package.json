@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "start": "npx http-server -P http://127.0.0.1:${PORT} ./dist",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "start": "npx http-server -P http://127.0.0.1:${PORT} ./dist"
+    "lint": "vue-cli-service lint"
+
   },
   "dependencies": {
     "axios": "^1.2.0",
