@@ -1,7 +1,7 @@
 import Axios  from 'axios'
 
 const axiosInstance = Axios.create({
-    baseURL: 'http://localhost:3000/api',
+    baseURL: 'mongodb://mongo:HuShxzrEedbhJg1KWVZT@containers-us-west-96.railway.app:5883/api',
     headers: { 'X-Custom-Header': 'foobar' }
 })
 
