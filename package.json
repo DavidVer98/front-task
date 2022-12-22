@@ -6,7 +6,8 @@
     "start": "npx http-server -P http://0.0.0.0:${PORT} ./dist",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "clean": "rimraf dist"
 
   },
   "dependencies": {

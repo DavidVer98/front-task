@@ -1,6 +1,7 @@
 !
 <template>
-  <div class="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300">
+ 
+  <div class="max-w-lg mx-auto my-10 bg-white p-8 rounded-xl shadow shadow-slate-300" >
 
     <div v-if="error" class="flex p-4 text-sm text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800 mb-5" role="alert">
         <svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
@@ -32,15 +33,16 @@
         </div>
         <p class="text-slate-500">Hello, here are your latest tasks</p>
 
-        <div id="tasks" class="my-5">
+        <div id="tasks" class="my-5" style="overflow-y: auto;
+    max-height: 500px; ">
           <div v-for="item in tasks" :key="item._id"  class="grid grid-cols-1  grid-flow-row ">
-          <div @click="accordion(item._id)" class="cursor-pointer inline-flex p-5 text-center bg-white row-start-1 row-end-1  border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150">
-              <div class="inline-flex items-center space-x-2">
+
+              <div  @click="accordion(item._id)" class="inline-flex items-center space-x-2 cursor-pointer p-5 text-center bg-white row-start-1 row-end-1  border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-slate-500 hover:text-indigo-600 hover:cursor-pointer">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg> 
-              <div class="text-gray-800">{{item.title}}</div>
-          </div>
+              <div class="text-gray-800 truncate" style="text-align: start;    width:40ch;">{{item.title}}</div>
+      
           </div>
           <div class=" p-5 text-center bg-white col-start-2 col-end-4 border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent">
               <div class="inline-flex"> 
