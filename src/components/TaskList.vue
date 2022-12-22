@@ -33,8 +33,16 @@
         </div>
         <p class="text-slate-500">Hello, here are your latest tasks</p>
 
-        <div id="tasks" class="my-5" style="overflow-y: auto;
-    max-height: 500px; ">
+
+        <div id="tasks" class="my-2" style="overflow-y: auto; max-height: 500px; ">
+          <div v-for="item in tasks" :key="item._id"  class="grid grid-cols-1  grid-flow-row ">
+            <TaskData :task="item" @onDeleteTask="deleteTask" />
+          </div>
+      </div>
+      <h1>test</h1>
+ 
+
+        <!-- <div id="tasks" class="my-5" style="overflow-y: auto; max-height: 500px; ">
           <div v-for="item in tasks" :key="item._id"  class="grid grid-cols-1  grid-flow-row ">
 
               <div  @click="accordion(item._id)" class="inline-flex items-center space-x-2 cursor-pointer p-5 text-center bg-white row-start-1 row-end-1  border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150">
@@ -70,7 +78,7 @@
             </ul>
             </div>
           </div>
-      </div>
+      </div> -->
   
         <p class="text-xs text-slate-500 text-center">Last updated {{minutos}} minutes ago</p>
     </div>
@@ -83,12 +91,13 @@ import { defineComponent } from "vue";
 import TaskService from '../../services/TaskService';
 import {Task} from 'src/interfaces/Task';
 import moment from 'moment';
-
+import TaskData from './TaskData.vue';
 export default defineComponent({
   name: "TasksList",
   setup() {
     return {};
   },
+  components: {TaskData},
   data() {
     return {
       tasks: [] as Task[],
@@ -133,11 +142,8 @@ export default defineComponent({
   },
   methods: {
     deleteTask(id: any) {
-      TaskService.deleteTask(id).then((response) => {
-        this.tasks = this.tasks.filter((task) => task._id !== response._id);
-      }).catch((error) => {
-        console.log(error);
-      });
+      console.log("Deleted item" + id);
+      this.tasks = this.tasks.filter((task) => task._id !== id);
     },
     accordion(_id: any) {
             this.isOpen = !this.isOpen
