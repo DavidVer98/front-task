@@ -1,6 +1,6 @@
 <template>
  
-        <div   id="tasks" class="" style="overflow-y: auto; max-height: 500px; ">
+        <div   id="tasks" class="" style="overflow-y: auto; max-height: 500px; overflow-x: hidden;">
           <div  class="grid grid-cols-1  grid-flow-row ">
 
               <div  @click="accordion(task._id)" class="inline-flex items-center space-x-2 cursor-pointer p-5 text-center bg-white row-start-1 row-end-1  border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150">
@@ -23,7 +23,8 @@
                   </svg>                       
                 </div>
           </div>
-          <div v-if="(idAccordion === task._id)" :class="isOpen ? 'd-block' : 'hidden ' "   class="p-5  bg-white col-start-1 col-end-4 ">
+          <Transition  name="slide-fade">
+          <div v-if="(!isOpen)"    class="p-5 bg-white col-start-1 col-end-4 " style="overflow: hidden !important">
               <div class="grid grid-cols-2 gap-1">
                 <div class="col-span-1">
                   <span class="text-slate-800 ">Fecha: </span> 
@@ -43,8 +44,8 @@
                 <span class="text-slate-400 text-base font-light leading-relaxed mt-0 mb-4 ">{{task.description}}</span>
                 </div>
               </div>
-
             </div>
+            </Transition>
           </div>
 
   
@@ -77,7 +78,7 @@ export default defineComponent({
       dateUpdate: new Date(),
       error: false,
       idAccordion : '',
-      isOpen: false,
+      isOpen: true,
       checked: this.task.done,
     };
   },
@@ -111,4 +112,28 @@ export default defineComponent({
 );
 </script>
 
-<style scoped></style>
+<style>
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+/*
+  Enter and leave animations can use different
+  durations and timing functions.
+*/
+.slide-fade-enter-active {
+  transition: all .3s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all .8s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(10px);
+  opacity: 0;
+}
+
+
+</style>

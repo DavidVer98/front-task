@@ -36,4 +36,7 @@ export default defineComponent({
     top: 95%;
     right: 0%;
 }
+body::-webkit-scrollbar{
+  display: none;
+}
 </style>
