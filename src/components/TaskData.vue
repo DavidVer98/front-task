@@ -1,6 +1,6 @@
 <template>
  
-        <div   id="tasks" class="my-5" style="overflow-y: auto; max-height: 500px; ">
+        <div   id="tasks" class="" style="overflow-y: auto; max-height: 500px; ">
           <div  class="grid grid-cols-1  grid-flow-row ">
 
               <div  @click="accordion(task._id)" class="inline-flex items-center space-x-2 cursor-pointer p-5 text-center bg-white row-start-1 row-end-1  border-b border-slate-200 py-3 px-2 border-l-4  border-l-transparent bg-gradient-to-r from-transparent to-transparent hover:from-slate-100 transition ease-linear duration-150">
@@ -24,16 +24,26 @@
                 </div>
           </div>
           <div v-if="(idAccordion === task._id)" :class="isOpen ? 'd-block' : 'hidden ' "   class="p-5  bg-white col-start-1 col-end-4 ">
-            <ul>
-              <li>
-                <span class="text-slate-800">Descripción: </span> 
-                <span class="text-slate-400">{{task.description}}</span>
-              </li>
-              <li>
-                <span class="text-slate-800">Fecha: </span> 
-                <span class="text-slate-400">{{ filterformatDate(new Date (task.date))  }}</span>
-                </li>
-            </ul>
+              <div class="grid grid-cols-2 gap-1">
+                <div class="col-span-1">
+                  <span class="text-slate-800 ">Fecha: </span> 
+                  <span class="text-slate-400 text-base font-light leading-relaxed mt-0 mb-4 ">{{filterformatDate(new Date (task.date))}}</span>
+                </div>
+         
+                <div class="text-end ml-5">
+                  <label class="inline-flex relative items-center  cursor-pointer">
+                  <input type="checkbox" value="false" class="sr-only peer" v-model="checked" @click="doneTask()">
+                  <div class="w-7 h-4 bg-gray-200 rounded-full peer dark:bg-red-400 peer-focus:ring-4 peer-focus:bg-indigo-600 dark:peer-focus:ring-gray-200 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all dark:border-gray-600 peer-checked:bg-green-600"></div>
+                
+                </label>
+                </div>
+
+                <div class="col-span-2">
+                  <span class="text-slate-800">Descripción: </span> 
+                <span class="text-slate-400 text-base font-light leading-relaxed mt-0 mb-4 ">{{task.description}}</span>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -64,33 +74,12 @@ export default defineComponent({
   },
   data() {
     return {
-      tasks: [] as Task[],
-      newTask:[] as Task[],
       dateUpdate: new Date(),
-      minutos: 0,
       error: false,
       idAccordion : '',
       isOpen: false,
-      isDelete: false,
+      checked: this.task.done,
     };
-  },
-
-  mounted() {
-    TaskService.getTasks().then((response) => {
-      this.tasks = response;
-      console.log(response);
-      var utc_a = new Date(this.tasks[this.tasks.length-1].date);
-      var utc_b = new Date(this.dateUpdate.toUTCString());
-      let diff = Math.abs(utc_b.getMinutes()  - utc_a.getMinutes() );
-      console.log(utc_a.getMinutes() , utc_b.getMinutes());
-      console.log(diff)
-      this.minutos = diff;
-      this.tasks.forEach(task => {
-        console.log("--------->",new Date(task.date).getHours(), new Date(task.date).getMinutes(), new Date(task.date).getSeconds())  
-      })
-    }).catch((error) => {
-      console.log(error);
-    });
   },
   methods: {
     deleteTask(id: any) {
@@ -107,9 +96,17 @@ export default defineComponent({
         },
         filterformatDate(date: any) {
     return moment(date).format("DD/MM/YYYY HH:mm:ss");
+    },
+  doneTask(){
+    // eslint-disable-next-line vue/no-mutating-props
+    this.task.done = !this.task.done
+    TaskService.updateTask(this.task._id, this.task).then((response) => {
+      this.$emit("onUpdateTask", this.task);
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
   },
-  },
-
   },
 );
 </script>
