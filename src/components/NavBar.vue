@@ -20,11 +20,13 @@
       <li>
         <router-link to="/task"  class="block py-2 pl-3 pr-4 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</router-link>
       </li>
-      <!-- <li>
-        <router-link to="/task" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">List</router-link>
-      </li> -->
       <li>
         <router-link to="/task/new" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">New Task</router-link>
+      </li>
+      <li>
+        <a href="https://github.com/DavidVer98"   class="hidden sm:inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-0.5">
+          <img src="../../public/github.png" class="w-5" alt="">
+        </a>
       </li>
     </ul>
   </div>
@@ -42,6 +44,11 @@
         <li >
             <router-link @click="(isOpen=!isOpen)" to="/task/new" class="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">New Task</router-link>
         </li>
+        <li>
+        <a href="https://github.com/DavidVer98"   class=" block py-2 pl-3 pr-1 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+          <img src="../../public/github.png" class="w-5 mb-1 py-2 inline-flex " alt="git"> <span class="ml-0 ">Github</span>
+        </a>
+      </li>
     </ul>
        
 
